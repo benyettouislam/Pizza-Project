@@ -5,37 +5,63 @@
 [![IDE](https://img.shields.io/badge/IDE-Visual%20Studio-violet.svg)](https://visualstudio.microsoft.com/)
 [![GitHub repo size](https://img.shields.io/github/repo-size/benyettouislam/Pizza-Project)](https://github.com/benyettouislam/Pizza-Project)
 
-A desktop application built using **C#** and **Windows Forms** designed to streamline pizza order customization and calculate the total bill dynamically in real-time.
+A high-performance desktop application built using **C#** and **Windows Forms** on the **.NET Framework**. The project demonstrates event-driven programming, object-oriented concepts, dynamic UI state synchronization, and real-time pricing calculation logic for pizza order customization.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-* **Size Selection:** Choose between Small, Medium, and Large sizes with automatic base price adjustment.
-* **Crust Customization:** Multiple crust types (Thin, Thick, Stuffed, etc.).
-* **Toppings Selection:** Add various toppings (Extra Cheese, Mushrooms, Olives, Pepperoni, Onions, Tomatoes, etc.) with instant cost updates.
-* **Eating Place / Delivery Option:** Choose between **Dine-in** and **Takeaway / Delivery**.
-* **Live Order Summary:** Dynamic panel displaying all chosen parameters and total cost in real-time.
-* **Reset Order:** A single-click reset button to clear selected options and start a new order.
-
----
-
-## 🛠️ Tech Stack
-
-* **Language:** C#
-* **Framework:** Windows Forms (.NET Framework)
-* **IDE:** Microsoft Visual Studio
+* **Dynamic Size Selection:** Choose between Small, Medium, and Large sizes with immediate base price adjustment.
+* **Crust Type Customization:** Support for Thin, Thick, or Stuffed Crust with individual pricing rules.
+* **Multi-Topping Selection:** Checkbox-based topping additions (Extra Cheese, Mushrooms, Olives, Tomatoes, Onions, Green Peppers) with instant cumulative cost updates.
+* **Order Type / Location:** Toggle between **Dine-In** and **Takeaway / Delivery**.
+* **Real-time Summary Panel:** Live GUI updating displaying selected items, order details, and total cost dynamically upon any UI state change.
+* **Order Confirmation & Lock:** Simulates order processing by locking active controls and prompting confirmation.
+* **Form Reset Mechanism:** Flushes inputs, restores default states, and unlocks the control suite for new orders.
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Tech Stack & Prerequisites
+
+* **Language:** C# 
+* **UI Framework:** Windows Forms (.NET Framework)
+* **IDE:** Microsoft Visual Studio 2019 / 2022
+* **Target Runtime:** .NET Framework 4.7.2+ / .NET Desktop SDK
+
+---
+
+## 🔬 Technical Implementation & Architecture
+
+### 1. Event-Driven Architecture
+The application utilizes an **event-driven GUI paradigm** where user interaction with form controls triggers event handlers that re-evaluate the order state:
+* **`CheckedChanged` Events:** Bound to `RadioButton` and `CheckBox` controls to capture user selections immediately.
+* **Centralized Calculation Engine:** Instead of calculating prices in isolated handlers, a core method (`UpdateOrderSummary()` / `CalculateTotalPrice()`) is executed whenever any choice changes. This ensures single-responsibility design and prevents state desynchronization.
+
+### 2. Pricing & Cost Calculation Logic
+The total price is calculated dynamically using a modular mathematical formula:
+
+$$\text{Total Price} = \text{Base Price (Size)} + \text{Crust Fee} + \sum \text{Selected Topping Fees}$$
+
+* **Base Prices:** Assigned using control tags (`Tag` property) or conditional logic mapped to selected sizes.
+* **Cumulative Topping Fees:** Iterates through active `CheckBox` controls, adding fixed unit costs per enabled topping.
+
+### 3. UI Control Flow & State Management
+* **Control Tagging / Enums:** Leverages strongly typed logic and control properties (`Tag` or custom data structures) to map UI elements directly to numerical value definitions.
+* **Control Grouping:** Uses `GroupBox` containers (`gbSize`, `gbCrust`, `gbToppings`, `gbWhereToEat`, `gbOrderSummary`) to maintain logical separation of UI layers and manage control hierarchy.
+* **Form Lock & Reset State Machine:**
+  * When an order is placed (`btnOrderPizza_Click`), all selection controls are disabled (`Enabled = false`) to lock the finalized order state.
+  * The Reset action (`btnReset_Click`) re-enables controls, unchecks active boxes, restores default `RadioButton` selections, and clears summary labels.
+
+---
+
+## 📁 Project File Structure
 
 ```text
 Pizza-Project-main/
-├── 14projectpizza.slnx       # Solution configuration file
-├── 14projectpizza.csproj     # C# Project configuration
-├── Program.cs                 # Main entry point of the application
-├── Form1.cs                   # Event handlers & price calculation logic
-├── Form1.Designer.cs          # Auto-generated UI component layout
-├── Form1.resx                 # GUI resources and image assets
-└── App.config                 # Application configuration file
+├── 14projectpizza.slnx       # Solution metadata & project mapping
+├── 14projectpizza.csproj     # C# Project configuration file & dependencies
+├── Program.cs                 # Main entry point (Application.Run(new Form1()))
+├── Form1.cs                   # Core business logic, event handlers, & pricing engine
+├── Form1.Designer.cs          # Auto-generated GUI layout and control definitions
+├── Form1.resx                 # Embedded resources, icons, and localized string assets
+└── App.config                 # Application configuration runtime settings
