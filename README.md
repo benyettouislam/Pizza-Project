@@ -65,3 +65,8 @@ Pizza-Project-main/
 ├── Form1.Designer.cs          # Auto-generated GUI layout and control definitions
 ├── Form1.resx                 # Embedded resources, icons, and localized string assets
 └── App.config                 # Application configuration runtime settings
+
+
+https://github.com/user-attachments/assets/2fdace92-ff77-496d-ad4b-d149d5f22dfd
+
+<img width="845" height="259" alt="Capture" src="https://github.com/user-attachments/assets/a24ec11d-98ac-4586-951f-d4a700546813" />
