@@ -51,6 +51,9 @@ $$\text{Total Price} = \text{Base Price (Size)} + \text{Crust Fee} + \sum \text{
 * **Form Lock & Reset State Machine:**
   * When an order is placed (`btnOrderPizza_Click`), all selection controls are disabled (`Enabled = false`) to lock the finalized order state.
   * The Reset action (`btnReset_Click`) re-enables controls, unchecks active boxes, restores default `RadioButton` selections, and clears summary labels.
+https://github.com/user-attachments/assets/2fdace92-ff77-496d-ad4b-d149d5f22dfd
+
+<img width="845" height="259" alt="Capture" src="https://github.com/user-attachments/assets/a24ec11d-98ac-4586-951f-d4a700546813" />
 
 ---
 
@@ -67,6 +70,3 @@ Pizza-Project-main/
 └── App.config                 # Application configuration runtime settings
 
 
-https://github.com/user-attachments/assets/2fdace92-ff77-496d-ad4b-d149d5f22dfd
-
-<img width="845" height="259" alt="Capture" src="https://github.com/user-attachments/assets/a24ec11d-98ac-4586-951f-d4a700546813" />
